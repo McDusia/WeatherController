@@ -12,10 +12,13 @@ import java.util.*;
 public class MeasureSender implements Runnable {
 
     private final org.slf4j.Logger LOG;
+    //------to generate random data:
     private Random rand = new Random();
     private final int MIN_TEMPERATURE = -25;
     private final int MAX_TEMPERATURE = 45;
+    //-------------------------------
     private Results results;
+    private GetWeatherInfo info;
 
     private KaaClient kaaClient;
 
@@ -23,6 +26,7 @@ public class MeasureSender implements Runnable {
         this.kaaClient = kaaClient;
         this.LOG = LOG;
         this.results = results;
+        this.info = new GetWeatherInfo();
     }
 
     @Override
@@ -43,8 +47,21 @@ public class MeasureSender implements Runnable {
     }
 
     private Weather generateTemperatureSample() {
-        Integer temperature = MIN_TEMPERATURE + rand.nextInt((MAX_TEMPERATURE - MIN_TEMPERATURE) + 1);
-        return new Weather(temperature, temperature, temperature, "sunny");
+        List<String> weather = info.getWeatherInfo();
+
+        Double t1 = Double.parseDouble(weather.get(0));
+        Double t2 = Double.parseDouble(weather.get(1));
+        Double t3 = Double.parseDouble(weather.get(2));
+
+        Integer temperature = t1.intValue();
+        Integer humidity = t2.intValue();
+        Integer pressure = t3.intValue();
+        String description = weather.get(3);
+        //Integer temperature = MIN_TEMPERATURE + rand.nextInt((MAX_TEMPERATURE - MIN_TEMPERATURE) + 1);
+        System.out.println("TUUUUUU");
+        System.out.println(temperature + " " + humidity + " " + pressure + " "+ description);
+        return new Weather(temperature, humidity, pressure, description);
+        //return new Weather(temperature, temperature, temperature, "windy");
     }
 
 }

@@ -33,7 +33,7 @@ public class Main {
 
         Results results = new Results();
 
-        LOG.info("--= Data collection demo started =--");
+        LOG.info("--= Weather controller started =--");
 
         KaaClient kaaClient = Kaa.newClient(new DesktopKaaPlatformContext(), new SimpleKaaClientStateListener() {
             @Override
@@ -47,15 +47,11 @@ public class Main {
             }
         }, true);
 
-        /*
-         * Set record count strategy for uploading every log record as soon as it is created.
-         */
+         //Set record count strategy for uploading every log record as soon as it is created.
         kaaClient.setLogUploadStrategy(new RecordCountLogUploadStrategy(LOGS_DEFAULT_THRESHOLD));
 
         MeasureSender measureSender = new MeasureSender(kaaClient, LOG, results);
-        /*
-         * Displays endpoint's configuration and change sampling period each time configuration will be updated.
-         */
+
         kaaClient.addConfigurationListener(configuration -> {
             LOG.info("--= Endpoint configuration was updated =--");
             displayConfiguration(configuration);
@@ -68,28 +64,16 @@ public class Main {
             }
         });
 
-        /*
-         * Start the Kaa client and connect it to the Kaa server.
-         */
         kaaClient.start();
         sleepForSeconds(MAX_SECONDS_TO_INIT_KAA);
 
-        /*
-         * Start periodical temperature value generating and sending results to Kaa node
-         */
         startMeasurement(measureSender);
 
         LOG.info("*** Press Enter to stop sending log records ***");
         waitForAnyInput();
 
-        /*
-         * Stop generating and sending data to Kaa node
-         */
         stopMeasurement();
 
-        /*
-         * Stop the Kaa client and release all the resources which were in use.
-         */
         kaaClient.stop();
         displayResults(results);
         LOG.info("--= Data collection demo stopped =--");
@@ -144,7 +128,7 @@ public class Main {
     private static void displayResults(Results results) {
         LOG.info("--= Measurement summary =--");
         LOG.info("Current sample period = {} seconds", samplePeriodInSeconds);
-        LOG.info("Total temperature samples sent = {}", results.getSentRecordsCount());
+        LOG.info("Total weather samples sent = {}", results.getSentRecordsCount());
         LOG.info("Total confirmed = {}", results.getConfirmationsCount());
     }
 }
