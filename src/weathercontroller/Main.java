@@ -1,5 +1,5 @@
 
-package org.kaaproject.kaa.demo.datacollection;
+package weathercontroller;
 
 import org.kaaproject.kaa.client.DesktopKaaPlatformContext;
 import org.kaaproject.kaa.client.Kaa;
@@ -76,7 +76,7 @@ public class Main {
 
         kaaClient.stop();
         displayResults(results);
-        LOG.info("--= Data collection demo stopped =--");
+        LOG.info("--= Weather app stopped =--");
     }
 
     private static void startMeasurement(MeasureSender measureSender) {

@@ -46,7 +46,7 @@
             </fileset>
             <manifest>
                 <attribute name="Main-Class"
-                           value="org.kaaproject.kaa.demo.datacollection.Main"/>
+                           value="weathercontroller.Main"/>
             </manifest>
             <zipgroupfileset includes="*.jar" dir="lib"/>
         </jar>

@@ -1,4 +1,4 @@
-package org.kaaproject.kaa.demo.datacollection;
+package weathercontroller;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

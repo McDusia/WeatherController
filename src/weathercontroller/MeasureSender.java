@@ -1,4 +1,4 @@
-package org.kaaproject.kaa.demo.datacollection;
+package weathercontroller;
 
 import org.kaaproject.kaa.client.KaaClient;
 import org.kaaproject.kaa.client.logging.BucketInfo;
@@ -57,10 +57,11 @@ public class MeasureSender implements Runnable {
         Integer humidity = t2.intValue();
         Integer pressure = t3.intValue();
         String description = weather.get(3);
-        //Integer temperature = MIN_TEMPERATURE + rand.nextInt((MAX_TEMPERATURE - MIN_TEMPERATURE) + 1);
-        System.out.println("TUUUUUU");
+
         System.out.println(temperature + " " + humidity + " " + pressure + " "+ description);
         return new Weather(temperature, humidity, pressure, description);
+        //      -----random data-----
+        //Integer temperature = MIN_TEMPERATURE + rand.nextInt((MAX_TEMPERATURE - MIN_TEMPERATURE) + 1);
         //return new Weather(temperature, temperature, temperature, "windy");
     }
 
